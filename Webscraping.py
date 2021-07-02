@@ -13,6 +13,8 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.common.exceptions import TimeoutException
 import time 
 import re
+import pandas as pd 
+import numpy as np 
 
 driver = webdriver.Chrome('/Users/reaganolguin/Downloads/chromedriver')
 driver.get('https://www.goodreads.com/book/popular_by_date/2021')
@@ -67,11 +69,31 @@ for i in ratings_and_shelvings_list:
 # grab all of the book descriptions
 description = driver.find_elements_by_css_selector('div.TruncatedText')
 description_list = [i.text for i in description]
+# Clean all of the descriptions 
 clean_desc_list = []
 for i in description_list:
     cleaned_string = re.sub(r'\n', '', i)
     cleaned_string = re.sub(r"\'", "'", cleaned_string)
     clean_desc_list.append(cleaned_string)
-print(clean_desc_list)
 
+print(len(rankings_list))
+print(len(authors_list))
+print(authors_list)
+print(len(titles_list))
+print(len(rating_list))
+print(len(num_ratings_list))
+print(len(num_shelvings_list))
+print(len(clean_desc_list))
+# creating the dataframe to be used for analysis 
+"""
+Books = pd.DataFrame()
+Books["Rank"] = [i for i in range(1,201)]
+Books["Title"] = titles_list
+Books["Author"] = authors_list
+Books["Rating"] = rating_list
+Books["NumberOfRatings"] = num_ratings_list
+Books["NumberOfShelves"] = num_shelvings_list
+Books["Description"] = clean_desc_list
 
+print(Books) 
+"""
