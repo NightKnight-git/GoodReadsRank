@@ -3,6 +3,7 @@ This code is used to webscrape the top books from the year 2021 on the GoodReads
 using selenium
 """
 
+from os import sep
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -43,13 +44,25 @@ titles_list = [i.text for i in titles]
 # grabbing all of the authors
 authors = driver.find_elements_by_css_selector('span.ContributorLink__name')
 authors_list = [i.text for i in authors]
-print(authors_list)
+
+
 # grabbing all of the book ratings, # of ratings, and the # of shelvings
 # This will need to be cleaned later
 ratings_and_shelvings = driver.find_elements_by_css_selector('div.BookListItemRating__column.BookListItemRating__column--secondary')
 ratings_and_shelvings_list = [i.text for i in ratings_and_shelvings]
-print(ratings_and_shelvings_list)
+
+# separating the ratings and shelving info into their own individual lists 
+rating_list =[]
+num_ratings_list = []
+num_shelvings_list = []
+for i in ratings_and_shelvings_list:
+    separated_string = i.splitlines()
+    rating_list.append(separated_string[0])
+    num_ratings_list.append(separated_string[1])
+    num_shelvings_list.append(separated_string[2])
+
+
+
 # grab all of the book descriptions
 description = driver.find_elements_by_css_selector('div.TruncatedText')
 description_list = [i.text for i in description]
-print(description_list)
