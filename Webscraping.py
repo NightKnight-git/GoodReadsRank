@@ -33,7 +33,11 @@ while True:
             break 
 
 # grabbing all the rankings of each book
-ranking = driver.find_elements_by_css_selector('h2.Text.Text__h2.Text__italic.Text__subdued')
-ranking_list = [i.text for i in ranking]
-print(ranking_list)
+rankings = driver.find_elements_by_css_selector('h2.Text.Text__h2.Text__italic.Text__subdued')
+ranking_list = [i.text for i in rankings]
+
+# grabbing all of the titles
+titles = driver.find_elements_by_css_selector('h3.Text.Text__title3.Text__umber')
+titles_list = [i.text for i in titles]
+print(titles_list)
 
