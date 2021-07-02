@@ -45,7 +45,7 @@ titles = driver.find_elements_by_css_selector('h3.Text.Text__title3.Text__umber'
 titles_list = [i.text for i in titles]
 
 # grabbing all of the authors
-authors = driver.find_elements_by_css_selector('span.ContributorLink__name')
+authors = driver.find_elements_by_css_selector('span.TruncatedItems.TruncatedItems--span')
 authors_list = [i.text for i in authors]
 
 
