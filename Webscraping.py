@@ -1,5 +1,5 @@
 """
-This file is used to webscrape the top books from the year 2021 on the GoodReads sight
+This code is used to webscrape the top books from the year 2021 on the GoodReads sight
 using selenium
 """
 
@@ -34,10 +34,22 @@ while True:
 
 # grabbing all the rankings of each book
 rankings = driver.find_elements_by_css_selector('h2.Text.Text__h2.Text__italic.Text__subdued')
-ranking_list = [i.text for i in rankings]
+rankings_list = [i.text for i in rankings]
 
 # grabbing all of the titles
 titles = driver.find_elements_by_css_selector('h3.Text.Text__title3.Text__umber')
 titles_list = [i.text for i in titles]
-print(titles_list)
 
+# grabbing all of the authors
+authors = driver.find_elements_by_css_selector('span.ContributorLink__name')
+authors_list = [i.text for i in authors]
+print(authors_list)
+# grabbing all of the book ratings, # of ratings, and the # of shelvings
+# This will need to be cleaned later
+ratings_and_shelvings = driver.find_elements_by_css_selector('div.BookListItemRating__column.BookListItemRating__column--secondary')
+ratings_and_shelvings_list = [i.text for i in ratings_and_shelvings]
+print(ratings_and_shelvings_list)
+# grab all of the book descriptions
+description = driver.find_elements_by_css_selector('div.TruncatedText')
+description_list = [i.text for i in description]
+print(description_list)
