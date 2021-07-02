@@ -12,6 +12,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.common.exceptions import TimeoutException
 import time 
+import re
 
 driver = webdriver.Chrome('/Users/reaganolguin/Downloads/chromedriver')
 driver.get('https://www.goodreads.com/book/popular_by_date/2021')
@@ -66,3 +67,11 @@ for i in ratings_and_shelvings_list:
 # grab all of the book descriptions
 description = driver.find_elements_by_css_selector('div.TruncatedText')
 description_list = [i.text for i in description]
+clean_desc_list = []
+for i in description_list:
+    cleaned_string = re.sub(r'\n', '', i)
+    cleaned_string = re.sub(r"\'", "'", cleaned_string)
+    clean_desc_list.append(cleaned_string)
+print(clean_desc_list)
+
+
