@@ -3,6 +3,7 @@ This code is used to webscrape the top books from the year 2021 on the GoodReads
 using selenium
 """
 
+from datetime import date
 from os import sep
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -15,6 +16,7 @@ import time
 import re
 import pandas as pd 
 import numpy as np 
+import openpyxl 
 
 driver = webdriver.Chrome('/Users/reaganolguin/Downloads/chromedriver')
 driver.get('https://www.goodreads.com/book/popular_by_date/2021')
@@ -99,3 +101,9 @@ Books["Description"] = clean_desc_list
 
 print(Books) 
 
+# create excel writer object
+writer = pd.ExcelWriter('GoodReadsTop200'+str(date)+'.xlsx')
+# write dataframe to excel
+Books.to_excel(writer,"Rankings")
+# save the excel
+writer.save()
