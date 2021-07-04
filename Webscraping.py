@@ -36,6 +36,8 @@ while True:
         except:
             break 
 
+
+
 # grabbing all the rankings of each book
 rankings = driver.find_elements_by_css_selector('h2.Text.Text__h2.Text__italic.Text__subdued')
 rankings_list = [i.text for i in rankings]
@@ -47,6 +49,13 @@ titles_list = [i.text for i in titles]
 # grabbing all of the authors
 authors = driver.find_elements_by_css_selector('div.BookListItem__authors')
 authors_list = [i.text for i in authors]
+cleaned_authors =[]
+for i in authors_list:
+    cleaned_string = re.sub(r'\n', '', i)
+    cleaned_string = re.sub(r"...more", '',cleaned_string)
+    cleaned_authors.append(cleaned_string)
+
+
 
 
 
@@ -77,24 +86,16 @@ for i in description_list:
     cleaned_string = re.sub(r"\'", "'", cleaned_string)
     clean_desc_list.append(cleaned_string)
 
-print(len(rankings_list))
-print(len(authors_list))
-print(authors_list)
-print(len(titles_list))
-print(len(rating_list))
-print(len(num_ratings_list))
-print(len(num_shelvings_list))
-print(len(clean_desc_list))
+
 # creating the dataframe to be used for analysis 
-"""
 Books = pd.DataFrame()
-Books["Rank"] = [i for i in range(1,201)]
+Books["Rank"] = rankings_list
 Books["Title"] = titles_list
-Books["Author"] = authors_list
+Books["Author"] = cleaned_authors
 Books["Rating"] = rating_list
 Books["NumberOfRatings"] = num_ratings_list
 Books["NumberOfShelves"] = num_shelvings_list
 Books["Description"] = clean_desc_list
 
 print(Books) 
-"""
+
